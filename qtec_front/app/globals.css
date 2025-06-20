@@ -1,0 +1,1529 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "Inter", sans-serif;
+}
+
+/* ===== SHARED STYLES FOR LOGIN AND REGISTER ===== */
+
+/* Container styles */
+.login-container,
+.register-container {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #171618;
+}
+
+/* Main card styles */
+.login-card,
+.register-card {
+  width: 100%;
+  max-width: 1000px;
+  height: 600px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* === PROFESSOR ACTIVATION MODAL STYLES === */
+.professor-activation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.professor-activation-modal {
+  width: 100%;
+  max-width: 1000px;
+  height: 600px;
+  animation: slideIn 0.3s ease-out;
+}
+
+.professor-activation-card {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.professor-activation-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 40px;
+}
+
+.activation-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* === AUMENTO DE ESPACIO ESPECÍFICO PARA REGISTER-CARD === */
+.register-card {
+  height: 700px;
+  max-width: 1100px;
+}
+
+/* Header text positioning */
+.login-header {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  z-index: 10;
+}
+
+.register-header {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  z-index: 10;
+}
+
+.login-text,
+.register-text {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Card content container */
+.card-content {
+  display: flex;
+  height: 100%;
+  flex: 1;
+}
+
+/* Left side - Form section */
+.form-section {
+  flex: 1;
+  padding: 80px 60px 60px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: white;
+  min-width: 0;
+  position: relative;
+}
+
+.register-card .form-section {
+  padding: 100px 60px 60px 60px;
+}
+
+/* Form header */
+.form-header {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.session-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 30px;
+  letter-spacing: 0.5px;
+}
+
+/* Logo container */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.qtec-logo-image {
+  width: 110px;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.qtec-text {
+  font-size: 80px;
+  font-weight: 800;
+  color: #000;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 1px 0;
+  text-align: center;
+}
+
+/* ===== LOGIN SPECIFIC STYLES ===== */
+
+/* Form buttons for login */
+.form-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 0;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.google-button {
+  width: 90%;
+  max-width: 294px;
+  height: 46px;
+  border: 1px solid #d1d5db;
+  background: white;
+  color: #374151;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-family: inherit;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.google-button:hover:not(:disabled) {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.google-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.google-button.loading {
+  pointer-events: none;
+}
+
+.google-icon {
+  flex-shrink: 0;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e5e7eb;
+  border-top: 2px solid #4285f4;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.ingresar-button {
+  width: 100%;
+  max-width: 300px;
+  height: 46px;
+  background: linear-gradient(135deg, #ff6b9d 0%, #4c9aff 100%);
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px;
+  margin-bottom: 70px;
+}
+
+.ingresar-button:hover {
+  background: linear-gradient(135deg, #ff5a8a 0%, #3d8bff 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.register-link span {
+  color: #6b7280;
+  font-size: 15px;
+}
+
+.register-anchor {
+  color: #ef4444;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.register-anchor:hover {
+  color: #dc2626;
+}
+
+/* ===== REGISTER SPECIFIC STYLES ===== */
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-label {
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form-input {
+  width: 100%;
+  height: 46px;
+  padding: 0 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #374151;
+  background: white;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #4c9aff;
+  box-shadow: 0 0 0 3px rgba(76, 154, 255, 0.1);
+}
+
+.form-input::placeholder {
+  color: #9ca3af;
+}
+
+/* ===== PASSWORD INPUT WITH EYE ICON ===== */
+
+.password-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input {
+  padding-right: 48px !important;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.password-toggle-btn:hover {
+  background: rgba(107, 114, 128, 0.1);
+}
+
+.password-toggle-btn:focus {
+  outline: none;
+  background: rgba(107, 114, 128, 0.1);
+}
+
+.eye-icon {
+  transition: all 0.2s ease;
+}
+
+.password-toggle-btn:hover .eye-icon {
+  stroke: #374151;
+}
+
+/* Checkbox field */
+.checkbox-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: #4c9aff;
+  cursor: pointer;
+}
+
+.checkbox-label {
+  color: #374151;
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Register button */
+.register-button {
+  width: 100%;
+  max-width: 300px;
+  height: 46px;
+  background: linear-gradient(135deg, #ff6b9d 0%, #4c9aff 100%);
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.register-card .register-button {
+  margin-bottom: 15px;
+}
+
+.register-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ff5a8a 0%, #3d8bff 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.register-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.register-button.loading {
+  pointer-events: none;
+}
+
+.register-form .google-button {
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 15px;
+}
+
+/* Login link */
+.login-link {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.register-card .login-link {
+  margin-bottom: 30px;
+}
+
+.login-link span {
+  color: #6b7280;
+  font-size: 15px;
+}
+
+.login-anchor {
+  color: #ef4444;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.login-anchor:hover {
+  color: #dc2626;
+}
+
+/* Back link */
+.back-link {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Right side - Image section */
+.image-section {
+  flex: 1;
+  position: relative;
+  background: #1f2937;
+  min-width: 0;
+}
+
+.background-image {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== NOTIFICATION STYLES ===== */
+
+.notification-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.notification-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 100%;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.notification-content {
+  padding: 2rem;
+  text-align: center;
+}
+
+.notification-icon {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.notification-text {
+  color: #374151;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.notification-close {
+  background: linear-gradient(135deg, #ff6b9d 0%, #4c9aff 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.notification-close:hover {
+  background: linear-gradient(135deg, #ff5a8a 0%, #3d8bff 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== DIGIT INPUT STYLES ===== */
+
+.digit-input {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #d1d5db;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: #374151;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.digit-input:focus {
+  outline: none;
+  border-color: #4c9aff;
+  box-shadow: 0 0 0 3px rgba(76, 154, 255, 0.1);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .login-card,
+  .register-card,
+  .professor-activation-card {
+    max-width: 800px;
+    height: 500px;
+  }
+
+  .register-card {
+    height: 600px;
+  }
+
+  .form-section {
+    padding: 60px 40px 40px 40px;
+  }
+
+  .register-card .form-section {
+    padding: 80px 40px 40px 40px;
+  }
+
+  .qtec-logo-image {
+    width: 38px;
+    height: 38px;
+  }
+
+  .qtec-text {
+    font-size: 28px;
+  }
+
+  .register-header {
+    right: 20px;
+    top: 15px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .login-container,
+  .register-container,
+  .professor-activation-overlay {
+    padding: 0.5rem;
+  }
+
+  .login-card,
+  .register-card,
+  .professor-activation-card {
+    max-width: 400px;
+    height: auto;
+    min-height: 500px;
+  }
+
+  .register-card {
+    min-height: 550px;
+  }
+
+  .card-content {
+    flex-direction: column;
+  }
+
+  .form-section {
+    flex: none;
+    padding: 60px 30px 30px 30px;
+  }
+
+  .register-card .form-section {
+    padding: 80px 30px 30px 30px;
+  }
+
+  .image-section {
+    flex: none;
+    height: 200px;
+    order: -1;
+  }
+
+  .login-header {
+    left: 20px;
+    top: 15px;
+  }
+
+  .register-header {
+    right: 20px;
+    top: 15px;
+  }
+
+  .qtec-logo-image {
+    width: 35px;
+    height: 35px;
+  }
+
+  .qtec-text {
+    font-size: 26px;
+  }
+
+  .session-title {
+    font-size: 18px;
+    margin-bottom: 25px;
+  }
+
+  .notification-overlay {
+    padding: 0.5rem;
+  }
+
+  .notification-content {
+    padding: 1.5rem;
+  }
+
+  .password-toggle-btn {
+    right: 10px;
+  }
+
+  .password-input {
+    padding-right: 44px !important;
+  }
+
+  .digit-input {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .login-container,
+  .register-container,
+  .professor-activation-overlay {
+    padding: 0.25rem;
+  }
+
+  .login-card,
+  .register-card,
+  .professor-activation-card {
+    margin: 10px;
+    max-width: calc(100vw - 20px);
+  }
+
+  .register-card {
+    min-height: 520px;
+  }
+
+  .form-section {
+    padding: 50px 25px 25px 25px;
+  }
+
+  .register-card .form-section {
+    padding: 60px 25px 25px 25px;
+  }
+
+  .form-buttons {
+    gap: 14px;
+  }
+
+  .google-button,
+  .ingresar-button,
+  .register-button {
+    height: 44px;
+  }
+
+  .qtec-text {
+    font-size: 24px;
+  }
+
+  .session-title {
+    font-size: 16px;
+  }
+
+  .form-fields {
+    max-width: 280px;
+  }
+
+  .password-toggle-btn {
+    right: 8px;
+  }
+
+  .password-input {
+    padding-right: 40px !important;
+  }
+
+  .eye-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .digit-input {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 360px) {
+  .form-section {
+    padding: 40px 20px 20px 20px;
+  }
+
+  .register-card .form-section {
+    padding: 50px 20px 20px 20px;
+  }
+
+  .qtec-logo-image {
+    width: 30px;
+    height: 30px;
+  }
+
+  .qtec-text {
+    font-size: 22px;
+  }
+
+  .google-button,
+  .ingresar-button,
+  .register-button {
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .form-fields {
+    max-width: 260px;
+  }
+
+  .password-toggle-btn {
+    right: 6px;
+  }
+
+  .password-input {
+    padding-right: 36px !important;
+  }
+
+  .eye-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .digit-input {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Estilos para el contenedor de los botones */
+.flex.gap-3.mt-4 {
+    display: flex; /* Habilita Flexbox para alinear los elementos en una fila */
+    gap: 1.5rem; /* Aumenta el espacio entre los botones. Puedes ajustar este valor (ej. 24px, 1.5rem, etc.) */
+    margin-top: 1rem; /* Margen superior para separarlo del contenido de arriba */
+    justify-content: center; /* Centra los botones horizontalmente dentro de su contenedor */
+    align-items: center; /* Alinea los botones verticalmente en el centro */
+    padding: 10px; /* Un poco de padding si el contenedor es un div simple */
+}
+
+/* Estilos base para ambos botones */
+.notification-close {
+    padding: 0.8rem 1.8rem; /* Relleno interno: vertical, horizontal. Aumentado para botones más grandes */
+    border: none; /* Elimina el borde predeterminado */
+    border-radius: 8px; /* Bordes más redondeados para un look suave */
+    cursor: pointer; /* Cambia el cursor a una mano al pasar por encima */
+    font-size: 1rem; /* Tamaño de fuente legible */
+    font-weight: 600; /* Texto seminegrita */
+    transition: all 0.3s ease; /* Transición suave para efectos hover y active */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidad */
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* Sombra de texto ligera para contraste */
+    color: white; /* Color de texto blanco para ambos botones */
+}
+
+
+/* Estilos específicos para el botón "Activar como Profesor" - Ahora con degradado */
+.notification-close:first-of-type {
+    /* Degradado de rojo (#EA454C) a azul (#1780FF) */
+    background: linear-gradient(135deg, #EA454C 0%, #1780FF 100%);
+    /* Opcional: añade un color de respaldo por si el degradado no es soportado en algún navegador muy antiguo */
+    background-color: #EA454C; /* Color de respaldo */
+}
+
+/* Efecto hover para "Activar como Profesor" */
+.notification-close:first-of-type:hover {
+    /* Puedes ajustar los porcentajes o los tonos para un efecto hover */
+    background: linear-gradient(135deg, #cc3f46 0%, #136ccf 100%); /* Tonos ligeramente más oscuros para el hover */
+    transform: translateY(-2px); /* Pequeño levantamiento al pasar el ratón */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+/* Efecto active para "Activar como Profesor" (cuando se hace clic) */
+.notification-close:first-of-type:active {
+    transform: translateY(0); /* Vuelve a la posición original */
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* Sombra más sutil */
+}
+
+/* Estilos específicos para el botón "Continuar como Estudiante" - Mantiene el color original */
+/* Se selecciona por el estilo inline que tiene, lo cual es una práctica a evitar en general,
+   pero funcional para tu código actual. Lo ideal sería una clase específica. */
+.notification-close[style*="background: #6b7280"] {
+    background: #6b7280; /* Color gris original */
+}
+
+/* Efecto hover para "Continuar como Estudiante" */
+.notification-close[style*="background: #6b7280"]:hover {
+    background: #5a606a; /* Gris un poco más oscuro al pasar el ratón */
+    transform: translateY(-2px); /* Pequeño levantamiento al pasar el ratón */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+/* Efecto active para "Continuar como Estudiante" */
+.notification-close[style*="background: #6b7280"]:active {
+    transform: translateY(0); /* Vuelve a la posición original */
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* Sombra más sutil */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilos para el contenedor de la notificación (nuevo) */
+.notification-container {
+    position: relative; /* Esencial para posicionar el botón de cierre de forma absoluta */
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding: 10px; /* Asegura espacio si el contenedor tiene un fondo o borde */
+    /* Considera añadir un padding-right o padding-top si el botón de cierre queda muy pegado al borde */
+    padding-right: 30px; /* Espacio extra para la 'x' si está a la derecha */
+}
+
+/* Estilos para el botón de cierre (la 'x') */
+.close-notification-btn {
+    position: absolute; /* Posiciona la 'x' de forma absoluta dentro de .notification-container */
+    top: 5px; /* Ajusta la distancia desde la parte superior */
+    right: 5px; /* Ajusta la distancia desde la derecha */
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    font-size: 1.5rem; /* Tamaño de la 'x' */
+    color: #999; /* Color gris suave */
+    cursor: pointer; /* Indica que es clicable */
+    padding: 5px; /* Padding para hacer el área de clic más grande */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.close-notification-btn:hover {
+    color: #333; /* Color más oscuro al pasar el ratón */
+}
+
+/* Resto de tus estilos (mantener los anteriores) */
+
+/* Estilos base para ambos botones */
+.notification-close {
+    padding: 0.8rem 1.8rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+/* Estilos específicos para el botón "Activar como Profesor" - Ahora con degradado */
+.notification-close:first-of-type {
+    background: linear-gradient(135deg, #EA454C 0%, #1780FF 100%);
+    background-color: #EA454C; /* Color de respaldo */
+}
+
+/* Efecto hover para "Activar como Profesor" */
+.notification-close:first-of-type:hover {
+    background: linear-gradient(135deg, #cc3f46 0%, #136ccf 100%); /* Tonos ligeramente más oscuros para el hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Efecto active para "Activar como Profesor" (cuando se hace clic) */
+.notification-close:first-of-type:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos específicos para el botón "Continuar como Estudiante" */
+.notification-close[style*="background: #6b7280"] {
+    background: #6b7280;
+}
+
+/* Efecto hover para "Continuar como Estudiante" */
+.notification-close[style*="background: #6b7280"]:hover {
+    background: #5a606a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Efecto active para "Continuar como Estudiante" */
+.notification-close[style*="background: #6b7280"]:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Landing Page Styles */
+.landing-container {
+  min-height: 100vh;
+  background-color: #171618;
+  color: white;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.landing-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at center, rgba(255, 107, 157, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Header Styles */
+.landing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  position: relative;
+  z-index: 10;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+}
+
+.qtec-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-icon {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-image {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.logo-text {
+  font-size:2.5rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: white;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.header-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.btn-acceso {
+  padding: 0.75rem 1.75rem;
+  border: 1px solid rgba(255, 6, 89, 0.411);
+  border-radius: 25px;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.btn-acceso:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(13, 118, 255, 0.25);
+  transform: translateY(-1px);
+  color: white;
+}
+
+.btn-empezar {
+  padding: 0.75rem 1.75rem;
+  background: linear-gradient(135deg, #EA454C 0%, #1780FF 100%);
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(233, 30, 99, 0.3);
+  border: none;
+}
+
+.btn-empezar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(20, 15, 15, 0.4);
+  background: linear-gradient(135deg, #EA454C 0%, #1780FF 100%);
+}
+
+/* Main Content */
+.landing-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 120px);
+  padding: 2rem 3rem;
+}
+
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 6rem;
+  max-width: 1400px;
+  width: 100%;
+  align-items: center;
+}
+
+/* Text Content */
+.text-content {
+  max-width: 650px;
+}
+
+.main-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 2.5rem;
+  color: white;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+.highlight-text {
+  background: linear-gradient(135deg, #e91e63 0%, #9c27b0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+}
+
+.subtitle-section {
+  margin-top: 2.5rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #b0b0b0;
+  margin-bottom: 0.75rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.subtitle-highlight {
+  font-size: 1.2rem;
+  color: #b0b0b0;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.color-learn {
+  color: #e91e63;
+  font-weight: 600;
+}
+
+.color-simulate {
+  color: #2196f3;
+  font-weight: 600;
+}
+
+.color-protect {
+  color: #9c27b0;
+  font-weight: 600;
+}
+
+/* Visual Content - Quantum Computing Image */
+.visual-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.quantum-image-container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quantum-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 30px rgba(233, 30, 99, 0.3));
+  animation: float 6s ease-in-out infinite;
+}
+
+.glow-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(233, 30, 99, 0.15) 0%, rgba(156, 39, 176, 0.1) 50%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse 4s ease-in-out infinite;
+  z-index: -1;
+}
+
+.floating-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: linear-gradient(135deg, #EA454C
+, #1780FF
+);
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+.particle-1 {
+  top: 20%;
+  left: 15%;
+  animation: float-particle 8s ease-in-out infinite;
+}
+
+.particle-2 {
+  top: 70%;
+  right: 20%;
+  animation: float-particle 10s ease-in-out infinite reverse;
+}
+
+.particle-3 {
+  bottom: 30%;
+  left: 25%;
+  animation: float-particle 12s ease-in-out infinite;
+}
+
+.particle-4 {
+  top: 40%;
+  right: 15%;
+  animation: float-particle 9s ease-in-out infinite reverse;
+}
+
+/* Animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+@keyframes float-particle {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.7;
+  }
+  25% {
+    transform: translateY(-15px) translateX(10px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-10px) translateX(-5px);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translateY(-20px) translateX(15px);
+    opacity: 0.8;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .content-wrapper {
+    gap: 4rem;
+  }
+
+  .main-title {
+    font-size: 3rem;
+  }
+
+  .quantum-image-container {
+    width: 350px;
+    height: 350px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .landing-header {
+    padding: 1.5rem 2rem;
+  }
+
+  .landing-main {
+    padding: 2rem;
+  }
+
+  .content-wrapper {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .main-title {
+    font-size: 2.75rem;
+  }
+
+  .quantum-image-container {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .landing-header {
+    padding: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .header-buttons {
+    gap: 0.75rem;
+  }
+
+  .btn-acceso,
+  .btn-empezar {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .landing-main {
+    padding: 1.5rem;
+  }
+
+  .main-title {
+    font-size: 2.25rem;
+    margin-bottom: 2rem;
+    line-height: 1.2;
+  }
+
+  .subtitle,
+  .subtitle-highlight {
+    font-size: 1.05rem;
+  }
+
+  .quantum-image-container {
+    width: 250px;
+    height: 250px;
+  }
+
+  .content-wrapper {
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .logo-text {
+    font-size: 1.5rem;
+  }
+
+  .logo-image {
+    width: 35px;
+    height: 35px;
+  }
+
+  .main-title {
+    font-size: 1.9rem;
+    line-height: 1.25;
+  }
+
+  .content-wrapper {
+    gap: 2rem;
+  }
+
+  .quantum-image-container {
+    width: 200px;
+    height: 200px;
+  }
+
+  .subtitle,
+  .subtitle-highlight {
+    font-size: 1rem;
+  }
+
+  .btn-acceso,
+  .btn-empezar {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .main-title {
+    font-size: 1.7rem;
+  }
+
+  .quantum-image-container {
+    width: 180px;
+    height: 180px;
+  }
+
+  .landing-main {
+    padding: 1rem;
+  }
+}
+
+/* Smooth animations */
+* {
+  transition: all 0.3s ease;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .quantum-image,
+  .glow-effect,
+  .particle {
+    animation: none;
+  }
+
+  * {
+    transition: none;
+  }
+}
+
+/* Performance optimizations */
+.quantum-image-container {
+  will-change: transform;
+}
+
+.glow-effect {
+  will-change: opacity, transform;
+}
+
+.particle {
+  will-change: transform, opacity;
+}
